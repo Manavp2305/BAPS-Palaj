@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { Dialog } from '@headlessui/react';
@@ -18,7 +18,7 @@ const Members = () => {
 
     const fetchMembers = async () => {
         try {
-            const { data } = await axios.get('/api/members', {
+            const { data } = await api.get('/members', {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setMembers(data);
@@ -38,10 +38,10 @@ const Members = () => {
             const config = { headers: { Authorization: `Bearer ${user.token}` } };
             
             if (editingMember) {
-                await axios.put(`/api/members/${editingMember._id}`, data, config);
+                await api.put(`/members/${editingMember._id}`, data, config);
                 toast.success('Member updated successfully');
             } else {
-                await axios.post('/api/members', data, config);
+                await api.post('/members', data, config);
                 toast.success('Member added successfully');
             }
             closeModal();
@@ -54,7 +54,7 @@ const Members = () => {
     const deleteMember = async (id) => {
         // if (!window.confirm('Are you sure?')) return; // REMOVED
         try {
-            await axios.delete(`/api/members/${id}`, {
+            await api.delete(`/members/${id}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             toast.success('Member removed');

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { format } from 'date-fns';
@@ -14,7 +14,7 @@ const Attendance = () => {
     // 1. Fetch Active Members
     const fetchMembers = async () => {
         try {
-            const { data } = await axios.get('/api/members', {
+            const { data } = await api.get('/members', {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             const activeMembers = data.filter(m => m.active);
@@ -37,7 +37,7 @@ const Attendance = () => {
             const initialMap = {};
             currentMembers.forEach(m => initialMap[m._id] = 'Absent');
 
-            const { data } = await axios.get(`/api/attendance/${date}`, {
+            const { data } = await api.get(`/attendance/${date}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
 
@@ -91,7 +91,7 @@ const Attendance = () => {
                 status: attendanceMap[memberId]
             }));
 
-            await axios.post('/api/attendance', {
+            await api.post('/attendance', {
                 date,
                 records
             }, {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     const fetchStats = async () => {
         try {
-            const { data } = await axios.get('/api/dashboard', {
+            const { data } = await api.get('/dashboard', {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setStats(data);

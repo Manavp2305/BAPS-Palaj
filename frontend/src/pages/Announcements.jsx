@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { toast } from 'react-toastify';
 import { HiPaperAirplane } from 'react-icons/hi';
@@ -14,7 +14,7 @@ const Announcements = () => {
 
     const fetchAnnouncements = async () => {
         try {
-            const { data } = await axios.get('/api/announcements', {
+            const { data } = await api.get('/announcements', {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setAnnouncements(data);
@@ -33,7 +33,7 @@ const Announcements = () => {
         if (!window.confirm('Send to all active members?')) return;
         setSending(true);
         try {
-            await axios.post('/api/announcements', data, {
+            await api.post('/announcements', data, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             toast.success('Announcement broadcasted successfully!');

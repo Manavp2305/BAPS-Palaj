@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api/axios';
 import Cookies from 'js-cookie';
 import { toast } from 'react-toastify';
 
@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         try {
-            const { data } = await axios.post('/api/auth/login', { email, password });
+            const { data } = await api.post('/auth/login', { email, password });
             setUser(data);
             Cookies.set('userInfo', JSON.stringify(data), { expires: 30 }); // 30 days
             toast.success('Login Successful');

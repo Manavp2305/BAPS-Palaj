@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import { format } from 'date-fns';
 
@@ -18,7 +18,7 @@ const AttendanceHistory = () => {
                 query = `?startDate=${startDate}&endDate=${endDate}`;
             }
             
-            const { data } = await axios.get(`/api/attendance/history${query}`, {
+            const { data } = await api.get(`/attendance/history${query}`, {
                 headers: { Authorization: `Bearer ${user.token}` }
             });
             setHistory(data);
