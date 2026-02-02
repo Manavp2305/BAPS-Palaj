@@ -9,9 +9,19 @@ const connectDB = require('./config/db');
 dotenv.config();
 
 // Connect to Database
-connectDB();
-
+// Connect to Database (Middleware for Vercel/Serverless)
 const app = express();
+
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+    } catch (err) {
+        console.error('Database connection error:', err);
+        // We don't exit here, let the error handler catch it or individual routes fail
+        // But if DB is down, everything DB-related will fail.
+    }
+    next();
+});
 
 // Middleware
 app.use(express.json());

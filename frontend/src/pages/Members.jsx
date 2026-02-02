@@ -120,23 +120,21 @@ const Members = () => {
             <div className="bg-white shadow overflow-hidden sm:rounded-md">
                 <ul className="divide-y divide-gray-200">
                     {filteredMembers.map((member) => (
-                        <li key={member._id} className="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
-                            <div>
-                                <p className="text-sm font-medium text-indigo-600 truncate">{member.name}</p>
-                                <div className="text-sm text-gray-500">
-                                    {member.email && <span className="mr-4">{member.email}</span>}
-                                    {member.mobile && <span>{member.mobile}</span>}
-                                </div>
-                                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${member.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                        <li key={member._id} className="px-4 py-4 flex items-start justify-between hover:bg-gray-50">
+                            <div className="flex-1 min-w-0 pr-4">
+                                <p className="text-base font-semibold text-indigo-600 truncate">{member.name}</p>
+                                {member.email && <p className="text-sm text-gray-500 truncate">{member.email}</p>}
+                                {member.mobile && <p className="text-sm text-gray-500">{member.mobile}</p>}
+                                <span className={`mt-1 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${member.active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                                     {member.active ? 'Active' : 'Inactive'}
                                 </span>
                             </div>
                             {user.role === 'admin' && (
-                                <div className="flex space-x-2">
-                                    <button onClick={() => openModal(member)} className="text-gray-400 hover:text-indigo-600">
+                                <div className="flex flex-col sm:flex-row gap-2 sm:space-x-2 mt-1">
+                                    <button onClick={() => openModal(member)} className="p-2 text-gray-400 hover:text-indigo-600 bg-gray-100 rounded-full hover:bg-gray-200">
                                         <HiPencil className="h-5 w-5" />
                                     </button>
-                                    <button onClick={() => deleteMember(member._id)} className="text-gray-400 hover:text-red-600">
+                                    <button onClick={() => deleteMember(member._id)} className="p-2 text-gray-400 hover:text-red-600 bg-gray-100 rounded-full hover:bg-gray-200">
                                         <HiTrash className="h-5 w-5" />
                                     </button>
                                 </div>
