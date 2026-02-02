@@ -29,12 +29,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <div className={`
             fixed inset-y-0 left-0 z-30 w-64 bg-indigo-800 text-white transform transition-transform duration-300 ease-in-out
             ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
-            md:translate-x-0 md:static md:inset-auto md:flex md:flex-col
+            md:translate-x-0 md:flex md:flex-col
         `}>
             <div className="p-6 flex justify-between items-start">
                 <div>
                     <h1 className="text-2xl font-bold">Yuvak Mandal</h1>
-                    <p className="text-xs opacity-75 mt-1">Attendance System</p>
+                    <p className="text-xs opacity-75 mt-1">Attendance Management System</p>
                     <div className="mt-4 text-sm bg-indigo-900 p-2 rounded hidden md:block">
                         User: {user?.name} <br/>
                         Role: <span className="uppercase">{user?.role}</span>

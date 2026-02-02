@@ -7,7 +7,7 @@ const Layout = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="flex flex-col md:flex-row bg-gray-100 min-h-screen">
+        <div className="flex flex-col md:block bg-gray-100 min-h-screen">
             {/* Mobile Header */}
             <div className="md:hidden bg-indigo-800 text-white p-4 flex items-center justify-between">
                 <h1 className="text-xl font-bold">Yuvak Mandal</h1>
@@ -21,7 +21,7 @@ const Layout = () => {
 
             <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
             
-            <div className="flex-1 p-4 md:p-8 overflow-x-hidden">
+            <div className="flex-1 p-4 md:p-8 overflow-x-hidden md:ml-64 md:min-h-screen">
                 <Outlet />
             </div>
             
